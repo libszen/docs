@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>TOAST UI Editor by FE Development Lab / NHN Entertainment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- OpenGraph -->
+    <meta property="og:url" content="https://nhnent.github.io/tui.editor" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TOAST UI Editor" />
+    <meta property="og:description" content="GFM Markdown Wysiwyg Editor - Productive and Extensible" />
+    <meta property="og:image" content="https://user-images.githubusercontent.com/1215767/34353629-95b58da0-ea6c-11e7-859b-df5e990dd157.png" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="bower_components/tui-color-picker/dist/tui-color-picker.css">
+    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
+    <link rel="stylesheet" href="bower_components/tui-chart/dist/tui-chart.css">
+    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor.css">
+    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor-contents.css">
+    <script src="bower_components/markdown-it/dist/markdown-it.js"></script>
+    <script src="bower_components/to-mark/dist/to-mark.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/tui-code-snippet/dist/tui-code-snippet.js"></script>
+    <script src="bower_components/tui-color-picker/dist/tui-color-picker.js"></script>
+    <script src="bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="bower_components/highlightjs/highlight.pack.js"></script>
+    <script src="bower_components/squire-rte/build/squire.js"></script>
+    <script src="bower_components/plantuml-encoder/dist/plantuml-encoder.js"></script>
+    <script src="bower_components/raphael/raphael.js"></script>
+    <script src="bower_components/tui-chart/dist/tui-chart.js"></script>
+    <script src="bower_components/tui-editor/dist/tui-editor-Editor-all.js"></script>
+
+    <style>
+     #editSection, #editSection *,
+     .tui-editor-contents *,
+     .CodeMirror pre {
+         font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+     }
+
+     #editSection button,
+     #editSection input,
+     #editSection .te-editor {
+         font-size: 12px;
+     }
+
+     #editSection h1,
+     #editSection h2,
+     #editSection h3,
+     #editSection h4,
+     #editSection h5,
+     #editSection h6 {
+         color: #222;
+         font-weight: 300;
+     }
+
+     #editSection .tui-popup-body h1 {
+         font-size: 28px;
+         color: black;
+     }
+
+     #editSection h1:first-of-type {
+         margin-top: 14px;
+     }
+
+     #editSection .tui-popup-body h2 {
+         font-size: 24px;
+         border-bottom: 1px solid #cccccc;
+         color: black;
+     }
+
+     #editSection .tui-popup-body h3 {
+         font-size: 18px;
+     }
+
+     #editSection .tui-popup-body h4 {
+         font-size: 16px;
+     }
+
+     #editSection .tui-popup-body h5 {
+         font-size: 14px;
+     }
+
+     #editSection .tui-popup-body h6 {
+         color: #777777;
+         font-size: 14px;
+     }
+
+     button {
+         font-size: 12px
+     }
+
+     .show-toolbar .tui-editor-defaultUI {
+         border: 1px solid #e5e5e5
+     }
+
+     .tui-editor-defaultUI {
+         margin: 15px 0;
+     }
+
+     .te-md-container,
+     .te-ww-container {
+         width: 100%
+     }
+
+     .te-md-container .CodeMirror,
+     .tui-editor-contents {
+         font-size: 20px;
+     }
+
+     .show-only-text .te-toolbar-section,
+     .show-only-text .te-mode-switch-section,
+     .show-only-text .te-markdown-tab-section {
+         visibility: hidden !important;
+         opacity: 0;
+         transition: visibility 0s linear 300ms, opacity 300ms;
+     }
+
+     .show-only-text:hover .te-toolbar-section,
+     .show-only-text:hover .te-mode-switch-section,
+     .show-only-text:hover .te-markdown-tab-section {
+         visibility: visible !important;
+         opacity: 1;
+         transition: visibility 0s linear 0ms, opacity 300ms;
+     }
+
+     .show-only-text .tui-editor-defaultUI {
+         border: 1px solid rgba(255, 255, 255, 0);
+         transition: border-color 0s linear 300ms, border-color 300ms;
+     }
+
+     .show-only-text:hover .tui-editor-defaultUI {
+         border: 1px solid #e5e5e5;
+         transition: border-color 0s linear 0ms, border-color 300ms;
+     }
+
+     .tui-editor-contents,
+     .CodeMirror {
+         color: #606c71;
+     }
+
+     .tui-editor-contents .task-list-item {
+         background-position: 0 5px;
+     }
+
+     .te-md-container .te-preview {
+         overflow-x: hidden;
+         overflow-y: auto;
+     }
+
+     .CodeMirror .cm-header {
+         font-weight: 300;
+     }
+
+     b, strong, .cm-strong {
+         font-weight: 400;
+     }
+
+
+    </style>
+  </head>
+  <body>
+    <style>
+        body { width: 99%; max-width: 99%; margin: 5px auto; }
+    </style>
+
+
+      <div id="editor-intro"></div>
+
+
+
+    <script>
+
+    </script>
+
+<script class="code-js">
+    var content = [
+      '| @cols=2:merged |',
+      '| --- | --- |',
+      '| table | table |',
+      '```uml',
+      'partition Conductor {',
+      '  (*) --> "Climbs on Platform"',
+      '  --> === S1 ===',
+      '  --> Bows',
+      '}',
+      '',
+      'partition Audience #LightSkyBlue {',
+      '  === S1 === --> Applauds',
+      '}',
+      '',
+      'partition Conductor {',
+      '  Bows --> === S2 ===',
+      '  --> WavesArmes',
+      '  Applauds --> === S2 ===',
+      '}',
+      '',
+      'partition Orchestra #CCCCEE {',
+      '  WavesArmes --> Introduction',
+      '  --> "Play music"',
+      '}',
+      '```',
+      '```chart',
+      ',category1,category2',
+      'Jan,21,23',
+      'Feb,31,17',
+      '',
+      'type: column',
+      'title: Monthly Revenue',
+      'x.title: Amount',
+      'y.title: Month',
+      'y.min: 1',
+      'y.max: 40',
+      'y.suffix: $',
+      '```'
+    ].join('\n');
+
+    var editor = new tui.Editor(
+    {
+      el: document.querySelector('#editor-intro'),
+      previewStyle: 'vertical',
+      height: zlGetEditorHeight(),
+      initialEditType: 'wysiwyg',
+      useCommandShortcut: true,
+      initialValue: content,
+      exts: [
+        {
+          name: 'chart',
+          minWidth: 100,
+          maxWidth: 600,
+          minHeight: 100,
+          maxHeight: 300
+        },
+        'scrollSync',
+        'colorSyntax',
+        'uml',
+        'mark',
+        'table',
+        'taskCounter'
+      ]
+    });
+
+    //['scrollSync', 'colorSyntax', 'uml', 'chart', 'mark', 'table', 'taskCounter'],
+
+    function zlGetEditorHeight()
+    {
+        var body = document.body,
+        html = document.documentElement;
+        var docHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                        html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+        return  docHeight-40 ;
+
+    }
+
+</script>
+
+  </body>
+</html>
