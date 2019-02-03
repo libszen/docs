@@ -1,4 +1,4 @@
-# wri# ZenLibs Writer
+# ZenLibs Writer
 
 ## Reason for existence
 
