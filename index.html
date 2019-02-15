@@ -2,23 +2,45 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>TOAST UI Editor by FE Development Lab / NHN Entertainment</title>
+    <title>ZenLibs Markdown Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- OpenGraph -->
-    <meta property="og:url" content="https://nhnent.github.io/tui.editor" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="TOAST UI Editor" />
-    <meta property="og:description" content="GFM Markdown Wysiwyg Editor - Productive and Extensible" />
-    <meta property="og:image" content="https://user-images.githubusercontent.com/1215767/34353629-95b58da0-ea6c-11e7-859b-df5e990dd157.png" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="bower_components/tui-color-picker/dist/tui-color-picker.css">
-    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
-    <link rel="stylesheet" href="bower_components/tui-chart/dist/tui-chart.css">
-    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor.css">
-    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor-contents.css">
+
+    
+    <link rel="preload" href="bower_components/markdown-it/dist/markdown-it.js" as="script">
+    <link rel="preload" href="bower_components/to-mark/dist/to-mark.js" as="script">
+    <link rel="preload" href="bower_components/jquery/dist/jquery.js" as="script">
+    <link rel="preload" href="bower_components/tui-code-snippet/dist/tui-code-snippet.js" as="script">
+    <link rel="preload" href="bower_components/tui-color-picker/dist/tui-color-picker.js" as="script">
+    <link rel="preload" href="bower_components/codemirror/lib/codemirror.js" as="script">
+    <link rel="preload" href="bower_components/highlightjs/highlight.pack.js" as="script">
+    <link rel="preload" href="bower_components/squire-rte/build/squire.js" as="script">
+    <link rel="preload" href="bower_components/plantuml-encoder/dist/plantuml-encoder.js" as="script">
+    <link rel="preload" href="bower_components/raphael/raphael.js" as="script">
+    <link rel="preload" href="bower_components/tui-chart/dist/tui-chart.js" as="script">
+    <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-Editor-all.js" as="script">
+
+    <link rel="preload" href="stylesheets/normalize.css" as="style" media="screen">
+    <link rel="preload" href="stylesheets/stylesheet.css" as="style" media="screen">
+    <link rel="preload" href="stylesheets/github-light.css" media="screen" as="style">
+    <link rel="preload" href="bower_components/tui-color-picker/dist/tui-color-picker.css" as="style">
+    <link rel="preload" href="bower_components/codemirror/lib/codemirror.css" as="style">
+    <link rel="preload" href="bower_components/highlightjs/styles/github.css" as="style">
+    <link rel="preload" href="bower_components/tui-editor/dist/tui-editor.css" as="style">
+    <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-contents.css" as="style">
+
+    <link rel="preload" href="TinySeed.md" as="fetch">
+
+   <link rel="stylesheet" href="stylesheets/normalize.css" media="screen" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="stylesheets/github-light.css" media="screen" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="bower_components/tui-color-picker/dist/tui-color-picker.css" media="none" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" media="none" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css" media="none" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor.css" media="none" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor-contents.css" media="none" onload="if(media!='all')media='all'">
+
+
+
     <script src="bower_components/markdown-it/dist/markdown-it.js"></script>
     <script src="bower_components/to-mark/dist/to-mark.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -32,6 +54,7 @@
     <script src="bower_components/tui-chart/dist/tui-chart.js"></script>
     <script src="bower_components/tui-editor/dist/tui-editor-Editor-all.js"></script>
 
+    
     <style>
      #editSection, #editSection *,
      .tui-editor-contents *,
@@ -168,33 +191,46 @@
     <div id="editor-intro"></div>
 
     <script class="code-js">
-        const content = "# Hello Universe \n ## Welcome to ZenLibs' Editor";
-        var editor = new tui.Editor(
-        {
-            el: document.querySelector('#editor-intro'),
-            previewStyle: 'vertical',
-            height: zlGetEditorHeight(),
-            initialEditType: 'wysiwyg',
-            useCommandShortcut: true,
-            initialValue: content,
-            exts: [
-            {
-                name: 'chart',
-                minWidth: 100,
-                maxWidth: 600,
-                minHeight: 100,
-                maxHeight: 300
-            },
-            'scrollSync',
-            'colorSyntax',
-            'uml',
-            'mark',
-            'table',
-            'taskCounter'
-            ]
-        });
 
-        //['scrollSync', 'colorSyntax', 'uml', 'chart', 'mark', 'table', 'taskCounter'],
+        initialContent();
+        var editor; 
+
+        function initialContent()
+        {
+            fetch('./TinySeed.md')
+            .then(function(response) 
+            {
+                return response.text();
+            })
+            .then(function(retText) 
+            {
+                editor = new tui.Editor(
+                {
+                    el: document.querySelector('#editor-intro'),
+                    previewStyle: 'vertical',
+                    height: zlGetEditorHeight(),
+                    initialEditType: 'wysiwyg',
+                    useCommandShortcut: true,
+                    initialValue: retText,
+                    exts: [
+                    {
+                        name: 'chart',
+                        minWidth: 100,
+                        maxWidth: 600,
+                        minHeight: 100,
+                        maxHeight: 300
+                    },
+                    'scrollSync',
+                    'colorSyntax',
+                    'uml',
+                    'mark',
+                    'table',
+                    'taskCounter'
+                    ]
+                });
+ 
+            });
+       }
 
         function zlGetEditorHeight()
         {
