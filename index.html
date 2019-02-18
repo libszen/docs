@@ -5,19 +5,18 @@
     <title>ZenLibs Markdown Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
-    <link rel="preload" href="bower_components/markdown-it/dist/markdown-it.js" as="script">
-    <link rel="preload" href="bower_components/to-mark/dist/to-mark.js" as="script">
-    <link rel="preload" href="bower_components/jquery/dist/jquery.js" as="script">
-    <link rel="preload" href="bower_components/tui-code-snippet/dist/tui-code-snippet.js" as="script">
-    <link rel="preload" href="bower_components/tui-color-picker/dist/tui-color-picker.js" as="script">
+    <link rel="preload" href="bower_components/markdown-it/dist/markdown-it.min.js" as="script">
+    <link rel="preload" href="bower_components/to-mark/dist/to-mark.min.js" as="script">
+    <link rel="preload" href="bower_components/jquery/dist/jquery.min.js" as="script">
+    <link rel="preload" href="bower_components/tui-code-snippet/dist/tui-code-snippet.min.js" as="script">
+    <link rel="preload" href="bower_components/tui-color-picker/dist/tui-color-picker.min.js" as="script">
     <link rel="preload" href="bower_components/codemirror/lib/codemirror.js" as="script">
-    <link rel="preload" href="bower_components/highlightjs/highlight.pack.js" as="script">
+    <link rel="preload" href="bower_components/highlightjs/highlight.pack.min.js" as="script">
     <link rel="preload" href="bower_components/squire-rte/build/squire.js" as="script">
-    <link rel="preload" href="bower_components/plantuml-encoder/dist/plantuml-encoder.js" as="script">
-    <link rel="preload" href="bower_components/raphael/raphael.js" as="script">
-    <link rel="preload" href="bower_components/tui-chart/dist/tui-chart.js" as="script">
-    <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-Editor-all.js" as="script">
+    <link rel="preload" href="bower_components/plantuml-encoder/dist/plantuml-encoder.min.js" as="script">
+    <link rel="preload" href="bower_components/raphael/raphael.min.js" as="script">
+    <link rel="preload" href="bower_components/tui-chart/dist/tui-chart.min.js" as="script">
+    <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-Editor-all.min.js" as="script">
 
     <link rel="preload" href="stylesheets/normalize.css" as="style" media="screen">
     <link rel="preload" href="stylesheets/stylesheet.css" as="style" media="screen">
@@ -41,19 +40,18 @@
 
 
 
-    <script src="bower_components/markdown-it/dist/markdown-it.js"></script>
-    <script src="bower_components/to-mark/dist/to-mark.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/tui-code-snippet/dist/tui-code-snippet.js"></script>
-    <script src="bower_components/tui-color-picker/dist/tui-color-picker.js"></script>
+    <script src="bower_components/markdown-it/dist/markdown-it.min.js"></script>
+    <script src="bower_components/to-mark/dist/to-mark.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/tui-code-snippet/dist/tui-code-snippet.min.js"></script>
+    <script src="bower_components/tui-color-picker/dist/tui-color-picker.min.js"></script>
     <script src="bower_components/codemirror/lib/codemirror.js"></script>
-    <script src="bower_components/highlightjs/highlight.pack.js"></script>
+    <script src="bower_components/highlightjs/highlight.pack.min.js"></script>
     <script src="bower_components/squire-rte/build/squire.js"></script>
-    <script src="bower_components/plantuml-encoder/dist/plantuml-encoder.js"></script>
-    <script src="bower_components/raphael/raphael.js"></script>
-    <script src="bower_components/tui-chart/dist/tui-chart.js"></script>
-    <script src="bower_components/tui-editor/dist/tui-editor-Editor-all.js"></script>
-
+    <script src="bower_components/plantuml-encoder/dist/plantuml-encoder.min.js"></script>
+    <script src="bower_components/raphael/raphael.min.js"></script>
+    <script src="bower_components/tui-chart/dist/tui-chart.min.js"></script>
+    <script src="bower_components/tui-editor/dist/tui-editor-Editor-all.min.js"></script>
     
     <style>
      #editSection, #editSection *,
@@ -212,6 +210,7 @@
                     initialEditType: 'wysiwyg',
                     useCommandShortcut: true,
                     initialValue: retText,
+                    usageStatistics: false,
                     exts: [
                     {
                         name: 'chart',
