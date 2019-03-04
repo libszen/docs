@@ -17,6 +17,8 @@
     <link rel="preload" href="bower_components/raphael/raphael.min.js" as="script">
     <link rel="preload" href="bower_components/tui-chart/dist/tui-chart.min.js" as="script">
     <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-Editor-all.min.js" as="script">
+    <link rel="preload" href="./treeview/tree.min.js" as="script">
+    
 
     <link rel="preload" href="stylesheets/normalize.css" as="style" media="screen">
     <link rel="preload" href="stylesheets/stylesheet.css" as="style" media="screen">
@@ -26,9 +28,14 @@
     <link rel="preload" href="bower_components/highlightjs/styles/github.css" as="style">
     <link rel="preload" href="bower_components/tui-editor/dist/tui-editor.css" as="style">
     <link rel="preload" href="bower_components/tui-editor/dist/tui-editor-contents.css" as="style">
-
+    <link rel="preload" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" as="style">
+    <link rel="preload" href="./treeview/treejs.min.css" as="style">
+    
     <link rel="preload" href="TinySeed.md" as="fetch">
 
+    <!--For custom toolbar added by ZenLibs-->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" media="screen" onload="if(media!='all')media='all'">
+   <link rel="stylesheet" href="./treeview/treejs.min.css" media="none" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="stylesheets/normalize.css" media="screen" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="stylesheets/github-light.css" media="screen" onload="if(media!='all')media='all'">
@@ -37,7 +44,6 @@
    <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css" media="none" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor.css" media="none" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="bower_components/tui-editor/dist/tui-editor-contents.css" media="none" onload="if(media!='all')media='all'">
-
 
 
     <script src="bower_components/markdown-it/dist/markdown-it.min.js"></script>
@@ -52,7 +58,84 @@
     <script src="bower_components/raphael/raphael.min.js"></script>
     <script src="bower_components/tui-chart/dist/tui-chart.min.js"></script>
     <script src="bower_components/tui-editor/dist/tui-editor-Editor-all.min.js"></script>
+    <script src="./treeview/tree.min.js"></script>
     
+    <!--Style for ZenLibs' toolbar-->
+    <style>
+        body {margin:0;}
+        
+        .icon-bar {
+          width: 100%;
+          background-color: gray ;
+          overflow: auto;
+        }
+        
+        .icon-bar a {
+          float: left;
+          width: 20%;
+          text-align: center;
+          transition: all 0.3s ease;
+          color: white;
+        }
+        
+        .icon-bar a:hover {
+          background-color: #000;
+        }
+        
+        .active {
+          background-color: #4CAF50;
+        }
+    </style>
+
+    <!--Style for side navbar-->
+
+    <style>
+     
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: black;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .sidenav a:hover {
+            color: white;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        
+        #drawerContainer {
+            color: white;
+            background: black; 
+        }
+        
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+
     <style>
      #editSection, #editSection *,
      .tui-editor-contents *,
@@ -186,6 +269,25 @@
         body { width: 96%; max-width: 96%; margin: 5px auto; }
     </style>
 
+    <div id="mySidenav" class="sidenav">
+    
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">ZenLibs</a>
+        
+    
+        <div id="drawerContainer"></div>
+    
+     </div>
+
+    <div class="icon-bar">
+        <a href="#" onclick="openNav()"><i class="fas fa-folder fa-lg"></i></a> 
+        <a href="#"><i class="fa fa-edit fa-lg"></i></a> 
+        <a href="#"><i class="far fa-save fa-lg"></i></a> 
+        <a href="#"><i class="fas fa-copy fa-lg"></i></a> 
+        <a href="#"><i class="fas fa-cloud fa-lg"></i></a> 
+        
+    </div>
+
     <div id="editor-intro"></div>
 
     <script class="code-js">
@@ -237,15 +339,21 @@
             html = document.documentElement;
             var docHeight = Math.max( body.scrollHeight, body.offsetHeight,
                             html.clientHeight, html.scrollHeight, html.offsetHeight );
+            
+            const toolbarHeight = 20;//20 pixels reserved for font-awesome icons acting as toolbar
 
             if(isThisMobile() === true)
             {
-                return  (docHeight/2 -10);
+                docHeight =  (docHeight/2 -10);
             }
             else
             {
-                return  docHeight-40 ;
+                docHeight =  docHeight-40 ;
             }
+
+            docHeight = docHeight - toolbarHeight;
+
+            return docHeight;
 
         }
 
@@ -257,6 +365,46 @@
         };
 
     </script>
+
+<script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        
+            var count = 1;
+                var root = new TreeNode("root");
+                    var n1 = new TreeNode("1");
+                        var n11 = new TreeNode("1.1");
+                    var n2 = new TreeNode("2");
+                    var n3 = new TreeNode("3");
+                        var n31 = new TreeNode("3.1");
+                        var n32 = new TreeNode("3.2");
+                            var n321 = new TreeNode("3.2.1");
+                        var n33 = new TreeNode("3.3");
+                root.addChild(n1);
+                root.addChild(n2);
+                root.addChild(n3);
+                n1.addChild(n11);
+                n3.addChild(n31);
+                n3.addChild(n32);
+                n3.addChild(n33);
+                n3.setEnabled(false);
+                n32.addChild(n321);
+                var view = new TreeView(root, "#drawerContainer");
+                
+                view.changeOption("leaf_icon", '<i class="fas fa-file"></i>');
+                view.changeOption("parent_icon", '<i class="fas fa-folder"></i>');
+        
+                TreeConfig.open_icon = '<i class="fas fa-angle-down"></i>';
+                TreeConfig.close_icon = '<i class="fas fa-angle-right"></i>';	
+            view.reload();
+        
+        
+        </script>
 
   </body>
 </html>
