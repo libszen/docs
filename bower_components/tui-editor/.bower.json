@@ -58,12 +58,12 @@
   "resolutions": {
     "tui-code-snippet": "^1.5.0"
   },
-  "version": "1.3.0",
-  "_release": "1.3.0",
+  "version": "1.3.1",
+  "_release": "1.3.1",
   "_resolution": {
     "type": "version",
-    "tag": "v1.3.0",
-    "commit": "ed55c44de5f1d0d0110dc263853936692e4ebfa0"
+    "tag": "v1.3.1",
+    "commit": "b223b4ca4f4a8aa92e9ced56a41db08d7f90abca"
   },
   "_source": "https://github.com/nhnent/tui.editor.git",
   "_target": "^1.2.5",

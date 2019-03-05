@@ -26,6 +26,6 @@
     "commit": "d5aae8979cabb0cd10d29ddb4273d2312d1a227d"
   },
   "_source": "https://github.com/nhnent/tui.code-snippet.git",
-  "_target": "^1.5.0",
+  "_target": "^1.2.5",
   "_originalSource": "tui-code-snippet"
 }

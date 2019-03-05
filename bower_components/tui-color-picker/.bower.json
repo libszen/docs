@@ -24,12 +24,12 @@
     "tui-code-snippet": "^1.3.0"
   },
   "homepage": "https://github.com/nhnent/tui.color-picker",
-  "version": "2.2.1",
-  "_release": "2.2.1",
+  "version": "2.2.2",
+  "_release": "2.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.2.1",
-    "commit": "8527bdd2ca87df2d50b70334e7de963d0c38e04c"
+    "tag": "v2.2.2",
+    "commit": "6e951eb959c7d6e3bb02dd3ed77faf8c0346a339"
   },
   "_source": "https://github.com/nhnent/tui.color-picker.git",
   "_target": "^2.2.1",
