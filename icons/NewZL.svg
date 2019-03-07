@@ -1,0 +1,18 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <title>ZenLibs-Icon</title>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_18"/>
+  <g id="svg_8">
+   <rect id="svg_6" height="256" width="254" y="2.35938" x="3" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="#003f7f"/>
+   <ellipse stroke="#000000" fill="#FF0000" stroke-width="5" cx="28.25235" cy="20.12204" id="svg_1" rx="23.41121" ry="16.12205"/>
+   <ellipse stroke="#000000" fill="#FF0000" stroke-width="5" cx="228.02804" cy="89.79232" rx="23.41121" ry="16.12205" id="svg_2"/>
+   <rect stroke="#000000" fill="#FF0000" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="67.27104" y="8.6063" width="185.72896" height="27.6378" id="svg_4"/>
+   <rect stroke="#000000" fill="#FF0000" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="2.50001" y="75.97342" width="185.72896" height="27.6378" id="svg_5"/>
+   <ellipse stroke="#000000" fill="#FF0000" stroke-width="5" cx="27.47197" cy="166.94783" rx="23.41121" ry="16.12205" id="svg_13"/>
+   <rect stroke="#000000" fill="#FF0000" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="66.49066" y="155.43208" width="185.72896" height="27.6378" id="svg_14"/>
+   <text stroke="#000000" fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="141.84614" y="223.94117" id="svg_19" font-size="24" font-family="Serif" text-anchor="middle" xml:space="preserve" transform="matrix(2.769520955733065,0,0,1.779706478167396,-264.6867878005007,-153.13760962812398) ">ZenLibs</text>
+  </g>
+ </g>
+</svg>

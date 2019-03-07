@@ -12,3 +12,18 @@
 1. Automatic save to local storage
 2. Ability to save directly to GitHub
 3. Markdown to HTML5 in native
+
+## TODO
+
+- [ ] Convert to PWA
+  - [ ] Add SW from traversy code
+  - [ ] Add app-manifest, and check that things work as a pwa
+- [ ] Use BrowserFS for: 
+  - [ ] Local file storage
+  - [ ] Sync with dropbox
+- [ ] Connect file-drawer & local storage for meaningful navigation
+- [ ] Add shortcuts for: 
+  - [ ] new file
+  - [ ] new folder
+  - [ ] delete file/folder
+- [ ] Switch between edit and view mode
