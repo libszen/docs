@@ -1,0 +1,14 @@
+{
+  "name": "ZenLibs",
+  "short_name": "ZenLibs",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icons/ZenLibs.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}

@@ -3,8 +3,8 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
         .register('js/sw_cached_site.js')
-        .then(reg => console.log('Service Worker: Registered (Pages)'))
-        .catch(err => console.log(`Service Worker: Error: ${err}`));
+        .then(reg => console.log('ZenLibs Docs Worker: Registered (Pages)'))
+        .catch(err => console.log(`ZenLibs Docs Worker: Error: ${err}`));
     });
   }
 
