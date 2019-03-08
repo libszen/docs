@@ -1,3 +1,4 @@
+/*
 // Make sure sw are supported
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -8,7 +9,7 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-
+*/
 
 initialContent();
 var editor; 
