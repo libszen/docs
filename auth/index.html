@@ -83,10 +83,13 @@
           {*/
               BrowserFS.FileSystem.IndexedDB.Create({}, function(e, idbfs) 
               {
+                BrowserFS.FileSystem.Dropbox.Create({client: dbx}, function(e, dbxfs) 
+                {
                   BrowserFS.FileSystem.MountableFileSystem.Create(
                   {
                       //'/data': lsfs,
                       //'/tmp': inMemory,
+                      '/dbx': dbxfs,
                       '/home': idbfs
                   }, function(e, mfs) 
                   {
@@ -94,6 +97,7 @@
                       //console.log("BrowserFS is ready-to-use!");
                       fsOps();
                   });
+                });
               });
           /*});
       });*/
@@ -102,8 +106,8 @@
     function fsOps()
     {
         const fs = require('fs');
-        const myFilePath = "/home/blah.txt";
-        fs.writeFile(myFilePath, 'WOW! I can do this in the browser!', 
+        const myFilePath = "/dbx/MyZenDoc.md";
+        fs.writeFile(myFilePath, `# Hello ZenDocs! \n## Introducing ZenDocs!! \nWOW! Everyone can do this in the browser!`, 
         function(err) 
         {
             fs.readFile(myFilePath, function(err, contents) 
