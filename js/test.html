@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BrowserFS Test</title>
+    <link rel="preload" href="browserfs.min.js" as="script">
+</head>
+
+<script type="text/javascript" src="browserfs.min.js"></script>
+<body>
+    
+</body>
+
+<script type="text/javascript">
+    // Installs globals onto window:
+    // * Buffer
+    // * require (monkey-patches if already defined)
+    // * process
+    // You can pass in an arbitrary object if you do not wish to pollute
+    // the global namespace.
+    BrowserFS.install(window);
+    
+    /*
+    BrowserFS.FileSystem.LocalStorage.Create(function(e, lsfs) 
+    {
+        BrowserFS.FileSystem.InMemory.Create(function(e, inMemory) 
+        {*/
+            BrowserFS.FileSystem.IndexedDB.Create({}, function(e, idbfs) 
+            {
+                BrowserFS.FileSystem.MountableFileSystem.Create(
+                {
+                    //'/data': lsfs,
+                    //'/tmp': inMemory,
+                    '/home': idbfs
+                }, function(e, mfs) 
+                {
+                    BrowserFS.initialize(mfs);
+                    //console.log("BrowserFS is ready-to-use!");
+                    fsOps();
+                });
+            });
+        /*});
+    });*/
+
+    function fsOps()
+    {
+        const fs = require('fs');
+        const myFilePath = "/home/blah.txt";
+        fs.writeFile(myFilePath, 'WOW! I can do this in the browser!', 
+        function(err) 
+        {
+            fs.readFile(myFilePath, function(err, contents) 
+            {
+                console.log(contents.toString());
+            });
+        });
+
+    }
+    
+</script>
+
+
+</html>
