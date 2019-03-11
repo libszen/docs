@@ -137,13 +137,20 @@
         
     </div>
     
-    <div id="iFrCont" >
+    <div id="iFrameParentDiv" >
+        <!--
             <iframe id="tuiFrame" class="tuiFrame" src="./tui/edit.html"  onload=tuiLoaded()  scrolling="no"></iframe>
+        -->
+            
     </div>
     
 </body>
 
 <script>
+
+//constant for iFrame Name
+const iFrameName = "tuiFrame";
+const iFrameParentDiv = "iFrameParentDiv";
 
 function openNav() 
 {
@@ -224,6 +231,7 @@ function isThisMobile()
 function tuiLoaded() 
 {
     //sendMsgToIFrame("testTopic", "Get in my belly ");
+    console.log("iFrame is loaded");
     fetch('./TinySeed.md')
     .then(function(response) 
     {
@@ -251,7 +259,7 @@ function bindEvent(element, eventName, eventHandler)
 function sendMsgToIFrame(inMsgTopic, inMsgString)
 {
     let u8BufFromStr = stringToU8Buffer(inMsgString);
-    const tuiEle = document.getElementById("tuiFrame");
+    const tuiEle = document.getElementById(iFrameName);
     tuiEle.contentWindow.postMessage(
     {
         aTopic: inMsgTopic,
@@ -275,16 +283,38 @@ function hanleMsgFromChild(msg)
         }
         break;
 
-        case 'renderRoute':
+        case 'gimmeContent':
         {
-            //this.console.log("renderRoute Req received!");
-            handleRenderRoute(msg.data.aBuf, msg.data.loggedIn);
+            tuiLoaded();
         }
         break;
         default:
             throw 'no aTopic on incoming message to ChromeWorker';
     }
 }
+
+function insertIFrame(inIframeSrc)
+{
+    var iframeSource = inIframeSrc;
+    // Create the iframe
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', iframeSource);
+    iframe.setAttribute('id', iFrameName);
+    iframe.setAttribute('class', iFrameName);
+    iframe.setAttribute('scrolling', "no");
+    
+    iframe.addEventListener("load", tuiLoaded);
+
+    const iFrameParent = document.getElementById(iFrameParentDiv);
+
+    var c = iFrameParent.childNodes;
+
+    iFrameParent.replaceChild(iframe, iFrameParent.firstChild);
+
+}
+
+insertIFrame("tui/edit.html");
+
 
 
 </script>

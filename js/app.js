@@ -99,10 +99,7 @@ function bindEvent(element, eventName, eventHandler)
     }
 }
 
-function getContent()
-{
 
-}
 
 function sendMsgToParent(inMsgTopic, inMsgString)
 {
