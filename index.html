@@ -289,7 +289,18 @@ function insertIFrame(inIframeSrc)
     iframe.setAttribute('src', iframeSource);
     iframe.setAttribute('id', iFrameName);
     iframe.setAttribute('class', iFrameName);
-    iframe.setAttribute('scrolling', "no");
+
+    let scrollMode = "no";
+    if(editMode===true)
+    {
+        scrollMode = "no";
+    }
+    else
+    {
+        scrollMode = "yes";
+    }
+
+    iframe.setAttribute('scrolling', scrollMode);
 
     iframe.style.width = document.body.clientWidth +  'px';
     iframe.style.height = zlGetEditorHeight() + 'px';
