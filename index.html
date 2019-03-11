@@ -8,6 +8,7 @@
     
 
     <link rel="preload" href="./treeview/tree.min.js" as="script">
+    <link rel="preload" href="./js/zlUtils.js" as="script">
     <link rel="preload" href="js/app.js" as="script">
     
 
@@ -22,6 +23,7 @@
 
 
     <script src="./treeview/tree.min.js"></script>
+    <script src="./js/zlUtils.js"></script>
 
     <!--Style for ZenLibs' toolbar-->
     <style>
@@ -221,27 +223,21 @@ function isThisMobile()
 
 function tuiLoaded() 
 {
-
-    const random = Math.random();
-    sendMessage('FromParent: ' + random);
-
+    //sendMsgToIFrame("testTopic", "Get in my belly ");
+    fetch('./TinySeed.md')
+    .then(function(response) 
+    {
+        return response.text();
+    })
+    .then(function(retText) 
+    {
+        sendMsgToIFrame("initTui", retText);
+    });
 }
 
-// Send a message to the child iframe
-var sendMessage = function(msg) 
-{
-    // Make sure you are sending a string, and to stringify JSON
-    const tuiEle = document.getElementById("tuiFrame");
-    tuiEle.contentWindow.postMessage(msg, '*');
-};
 
-// Listen to message from child window    const tuiEle = document.getElementById("tuiFrame");
-bindEvent(window, 'message', function (e) 
-{
-    //results.innerHTML = e.data;
-    console.log("Rcvd in parent: " + e.data);
-    
-});
+// Listen to message from child window    
+bindEvent(window, 'message', hanleMsgFromChild);
 
 function bindEvent(element, eventName, eventHandler) 
 {
@@ -252,6 +248,43 @@ function bindEvent(element, eventName, eventHandler)
     }
 }
 
+function sendMsgToIFrame(inMsgTopic, inMsgString)
+{
+    let u8BufFromStr = stringToU8Buffer(inMsgString);
+    const tuiEle = document.getElementById("tuiFrame");
+    tuiEle.contentWindow.postMessage(
+    {
+        aTopic: inMsgTopic,
+        aBuf: u8BufFromStr.buffer,
+    },
+    [
+        u8BufFromStr.buffer
+    ]);
+}
+
+
+function hanleMsgFromChild(msg) 
+{
+    switch (msg.data.aTopic) 
+    {
+        case 'echoMsg':
+        {
+            const u8buf = new Uint8Array(msg.data.aBuf);
+            const recvdString = u8BufToString(u8buf);
+            console.log(`Rcvd In Parent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`)
+        }
+        break;
+
+        case 'renderRoute':
+        {
+            //this.console.log("renderRoute Req received!");
+            handleRenderRoute(msg.data.aBuf, msg.data.loggedIn);
+        }
+        break;
+        default:
+            throw 'no aTopic on incoming message to ChromeWorker';
+    }
+}
 
 
 </script>

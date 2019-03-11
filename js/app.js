@@ -1,42 +1,32 @@
 
-initialContent();
-var editor; 
+let editor; 
 
-function initialContent()
+function initialContent(inInitContent)
 {
-    fetch('../TinySeed.md')
-    .then(function(response) 
+    editor = new tui.Editor(
     {
-        return response.text();
-    })
-    .then(function(retText) 
-    {
-        editor = new tui.Editor(
+        el: document.querySelector('#editor-intro'),
+        previewStyle: 'vertical',
+        height: zlGetEditorHeight(),
+        initialEditType: 'wysiwyg',
+        useCommandShortcut: true,
+        initialValue: inInitContent,
+        usageStatistics: false,
+        exts: [
         {
-            el: document.querySelector('#editor-intro'),
-            previewStyle: 'vertical',
-            height: zlGetEditorHeight(),
-            initialEditType: 'wysiwyg',
-            useCommandShortcut: true,
-            initialValue: retText,
-            usageStatistics: false,
-            exts: [
-            {
-                name: 'chart',
-                minWidth: 100,
-                maxWidth: 600,
-                minHeight: 100,
-                maxHeight: 300
-            },
-            'scrollSync',
-            'colorSyntax',
-            'uml',
-            'mark',
-            'table',
-            'taskCounter'
-            ]
-        });
-
+            name: 'chart',
+            minWidth: 100,
+            maxWidth: 600,
+            minHeight: 100,
+            maxHeight: 300
+        },
+        'scrollSync',
+        'colorSyntax',
+        'uml',
+        'mark',
+        'table',
+        'taskCounter'
+        ]
     });
 }
 
@@ -57,25 +47,48 @@ function zlGetEditorHeight()
 
 
 // Listen to messages from parent window
-bindEvent(window, 'message', function (e) 
-{
-    console.log("Rcvd in child: " + e.data);
-    toParent();
+bindEvent(window, 'message', hanleMsgFromParent);
 
-});
-
-function toParent() 
+function hanleMsgFromParent(msg) 
 {
-    const random = Math.random();
-    sendMessage('FromChild: ' + random);
-};
+    switch (msg.data.aTopic) 
+    {
+        case 'testTopic':
+        {
+            const u8buf = new Uint8Array(msg.data.aBuf);
+            const recvdString = u8BufToString(u8buf);
+            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
+            const childStr = "ChildAdded: " + recvdString;
+            sendMsgToParent("echoMsg", childStr);
+        }
+        break;
 
-// Send a message to the parent
-var sendMessage = function (msg) 
-{
-    // Make sure you are sending a string, and to stringify JSON
-    window.parent.postMessage(msg, '*');
-};
+        case 'initTui':
+        {
+            const u8buf = new Uint8Array(msg.data.aBuf);
+            const recvdString = u8BufToString(u8buf);
+            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
+            initialContent(recvdString);
+            //const childStr = "ChildAdded: " + recvdString;
+            //sendMsgToParent("echoMsg", childStr);
+        }
+        break;
+
+        case 'updateContent':
+        {
+            const u8buf = new Uint8Array(msg.data.aBuf);
+            const recvdString = u8BufToString(u8buf);
+            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
+            updateContent(recvdString);
+            //const childStr = "ChildAdded: " + recvdString;
+            //sendMsgToParent("echoMsg", childStr);
+        }
+        break;
+
+        default:
+            throw 'no aTopic on incoming message to ChromeWorker';
+    }
+}
 
 function bindEvent(element, eventName, eventHandler) 
 {
@@ -85,3 +98,23 @@ function bindEvent(element, eventName, eventHandler)
         element.attachEvent('on' + eventName, eventHandler);
     }
 }
+
+function getContent()
+{
+
+}
+
+function sendMsgToParent(inMsgTopic, inMsgString)
+{
+    let u8BufFromStr = stringToU8Buffer(inMsgString);
+    
+    window.parent.postMessage(
+    {
+        aTopic: inMsgTopic,
+        aBuf: u8BufFromStr.buffer,
+    },
+    [
+        u8BufFromStr.buffer
+    ]);
+}
+
