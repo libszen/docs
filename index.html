@@ -130,7 +130,7 @@
 
     <div class="icon-bar">
         <a href="#" onclick="openNav()"><i class="fas fa-folder fa-lg"></i></a> 
-        <a href="#"><i class="fa fa-edit fa-lg"></i></a> 
+        <a href="#" onclick="toggleEdit()"><i class="fa fa-edit fa-lg"></i></a> 
         <a href="#"><i class="far fa-save fa-lg"></i></a> 
         <a href="#"><i class="fas fa-copy fa-lg"></i></a> 
         <a href="#"><i class="fab fa-dropbox fa-lg"></i></a> 
@@ -138,10 +138,6 @@
     </div>
     
     <div id="iFrameParentDiv" >
-        <!--
-            <iframe id="tuiFrame" class="tuiFrame" src="./tui/edit.html"  onload=tuiLoaded()  scrolling="no"></iframe>
-        -->
-            
     </div>
     
 </body>
@@ -151,6 +147,9 @@
 //constant for iFrame Name
 const iFrameName = "tuiFrame";
 const iFrameParentDiv = "iFrameParentDiv";
+let editMode = false;
+const editSrc="./tui/edit.html";
+const viewSrc="./tui/view.html";
 
 function openNav() 
 {
@@ -313,7 +312,21 @@ function insertIFrame(inIframeSrc)
 
 }
 
-insertIFrame("tui/edit.html");
+function toggleEdit()
+{
+    if(editMode===false)
+    {
+        editMode = true;
+        insertIFrame(editSrc);
+    }
+    else
+    {
+        editMode = false;
+        insertIFrame(viewSrc);
+    }
+}
+
+insertIFrame(viewSrc);
 
 
 
