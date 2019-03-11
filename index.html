@@ -136,7 +136,7 @@
     </div>
     
     <div id="iFrCont" >
-            <iframe class="tuiFrame" src="./tui/edit.html"   scrolling="no"></iframe>
+            <iframe id="tuiFrame" class="tuiFrame" src="./tui/edit.html"  onload=tuiLoaded()  scrolling="no"></iframe>
     </div>
     
 </body>
@@ -219,16 +219,40 @@ function isThisMobile()
     return check;
 };  
 
-function iframeLoaded() 
+function tuiLoaded() 
 {
-    var iFrameID = document.getElementById('tuiFrame');
-    if(iFrameID) 
-    {
-            // here you can make the height, I delete it first, then I make it again
-            iFrameID.height = "";
-            iFrameID.height = zlGetEditorHeight();
-    }   
+
+    const random = Math.random();
+    sendMessage('FromParent: ' + random);
+
 }
+
+// Send a message to the child iframe
+var sendMessage = function(msg) 
+{
+    // Make sure you are sending a string, and to stringify JSON
+    const tuiEle = document.getElementById("tuiFrame");
+    tuiEle.contentWindow.postMessage(msg, '*');
+};
+
+// Listen to message from child window    const tuiEle = document.getElementById("tuiFrame");
+bindEvent(window, 'message', function (e) 
+{
+    //results.innerHTML = e.data;
+    console.log("Rcvd in parent: " + e.data);
+    
+});
+
+function bindEvent(element, eventName, eventHandler) 
+{
+    if (element.addEventListener) {
+        element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+    }
+}
+
+
 
 </script>
 </html>
