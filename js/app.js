@@ -57,7 +57,6 @@ function hanleMsgFromParent(msg)
         {
             const u8buf = new Uint8Array(msg.data.aBuf);
             const recvdString = u8BufToString(u8buf);
-            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
             const childStr = "ChildAdded: " + recvdString;
             sendMsgToParent("echoMsg", childStr);
         }
@@ -67,10 +66,8 @@ function hanleMsgFromParent(msg)
         {
             const u8buf = new Uint8Array(msg.data.aBuf);
             const recvdString = u8BufToString(u8buf);
-            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
             initialContent(recvdString);
-            //const childStr = "ChildAdded: " + recvdString;
-            //sendMsgToParent("echoMsg", childStr);
+            
         }
         break;
 
@@ -78,10 +75,7 @@ function hanleMsgFromParent(msg)
         {
             const u8buf = new Uint8Array(msg.data.aBuf);
             const recvdString = u8BufToString(u8buf);
-            console.log(`FromParent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`);
             updateContent(recvdString);
-            //const childStr = "ChildAdded: " + recvdString;
-            //sendMsgToParent("echoMsg", childStr);
         }
         break;
 

@@ -109,15 +109,6 @@
         body { width: 98%; max-width: 98%; margin: 5px auto; }
     </style>
 
-    <style>
-    .tuiFrame {
-        display: block;
-        border: none;
-        height: calc(100vh - 40px);
-        width: 100%;
-    }
-    </style>
-
     <div id="mySidenav" class="sidenav">
     
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -229,8 +220,6 @@ function isThisMobile()
 
 function tuiLoaded() 
 {
-    //sendMsgToIFrame("testTopic", "Get in my belly ");
-    console.log("iFrame is loaded");
     fetch('./TinySeed.md')
     .then(function(response) 
     {
@@ -278,7 +267,7 @@ function hanleMsgFromChild(msg)
         {
             const u8buf = new Uint8Array(msg.data.aBuf);
             const recvdString = u8BufToString(u8buf);
-            console.log(`Rcvd In Parent: MsgTopic: ${msg.data.aTopic} MsgString: ${recvdString}`)
+            
         }
         break;
 
@@ -301,6 +290,13 @@ function insertIFrame(inIframeSrc)
     iframe.setAttribute('id', iFrameName);
     iframe.setAttribute('class', iFrameName);
     iframe.setAttribute('scrolling', "no");
+
+    iframe.style.width = document.body.clientWidth +  'px';
+    iframe.style.height = zlGetEditorHeight() + 'px';
+    iframe.style.display="block";
+    iframe.style.border="none";
+
+    //console.log(`iFrame width: ${iframe.style.width} height: ${iframe.style.height}`);
     
     iframe.addEventListener("load", tuiLoaded);
 
@@ -326,9 +322,11 @@ function toggleEdit()
     }
 }
 
-insertIFrame(viewSrc);
+//insertIFrame(viewSrc);
 
-
+window.onload = function() {
+    insertIFrame(viewSrc);
+};
 
 </script>
 </html>
