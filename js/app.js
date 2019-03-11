@@ -4,7 +4,7 @@ var editor;
 
 function initialContent()
 {
-    fetch('./TinySeed.md')
+    fetch('../TinySeed.md')
     .then(function(response) 
     {
         return response.text();
