@@ -18,12 +18,13 @@
 - [x] Convert to PWA
   - [x] Add SW from traversy code
   - [x] Add app-manifest, and check that things work as a pwa
+- [ ] Switch between edit and view mode
 - [ ] Use BrowserFS for: 
-  - [ ] Local file storage
-  - [ ] Sync with dropbox
+  - [x] Local file storage
+  - [x] Sync with dropbox
+  - [ ] Tie-in with UI for clean UX
 - [ ] Connect file-drawer & local storage for meaningful navigation
 - [ ] Add shortcuts for: 
   - [ ] new file
   - [ ] new folder
   - [ ] delete file/folder
-- [ ] Switch between edit and view mode
