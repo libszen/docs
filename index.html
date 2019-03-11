@@ -194,9 +194,9 @@ function zlGetEditorHeight()
     var docHeight = Math.max( body.scrollHeight, body.offsetHeight,
                     html.clientHeight, html.scrollHeight, html.offsetHeight );
     
-    const toolbarHeight = 20;//20 pixels reserved for font-awesome icons acting as toolbar
+    const toolbarHeight = 30;//20 pixels reserved for font-awesome icons acting as toolbar
 
-    if(isThisMobile() === true)
+    if(isThisMobile() === true && editMode===true)
     {
         docHeight =  (docHeight/2 -10);
     }
@@ -295,8 +295,6 @@ function insertIFrame(inIframeSrc)
     iframe.style.height = zlGetEditorHeight() + 'px';
     iframe.style.display="block";
     iframe.style.border="none";
-
-    //console.log(`iFrame width: ${iframe.style.width} height: ${iframe.style.height}`);
     
     iframe.addEventListener("load", tuiLoaded);
 

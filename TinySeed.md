@@ -3,22 +3,115 @@
 ## A WYSIWYG Markdown Editor
 Based on [TUI Editor](https://github.com/nhnent/tui.editor). 
 
-## Chart Demo
+## Reason for existence
 
-```chart
-,Budget,Income,Expenses,Debt
-June,5000,8000,4000,6000
-July,3000,1000,4000,3000
-Aug,5000,7000,6000,3000
-Sep,7000,2000,3000,1000
-Oct,6000,5000,4000,2000
-Nov,4000,3000,5000,4000
+1. WYSIWYG editor for markdown on the web doesn’t exist
+2. 1 Is even worse on mobile devices
+3. As a learning experience building a full-fledged web application
+4. Opportunity to showcase ZenLibs
 
-type: column
-title: Monthly Revenue
+## Features
 
-x.title: Amount
-y.title: Month
-y.suffix: $
-legend.visible: false
-```
+1. Automatic save to local storage
+2. Ability to save directly to GitHub
+3. Markdown to HTML5 in native
+
+## TODO
+
+- [x] Convert to PWA
+  - [x] Add SW from traversy code
+  - [x] Add app-manifest, and check that things work as a pwa
+- [ ] Switch between edit and view mode
+- [ ] Use BrowserFS for: 
+  - [x] Local file storage
+  - [x] Sync with dropbox
+  - [ ] Tie-in with UI for clean UX
+- [ ] Connect file-drawer & local storage for meaningful navigation
+- [ ] Add shortcuts for: 
+  - [ ] new file
+  - [ ] new folder
+  - [ ] delete file/folder
+## Reason for existence
+
+1. WYSIWYG editor for markdown on the web doesn’t exist
+2. 1 Is even worse on mobile devices
+3. As a learning experience building a full-fledged web application
+4. Opportunity to showcase ZenLibs
+
+## Features
+
+1. Automatic save to local storage
+2. Ability to save directly to GitHub
+3. Markdown to HTML5 in native
+
+## TODO
+
+- [x] Convert to PWA
+  - [x] Add SW from traversy code
+  - [x] Add app-manifest, and check that things work as a pwa
+- [ ] Switch between edit and view mode
+- [ ] Use BrowserFS for: 
+  - [x] Local file storage
+  - [x] Sync with dropbox
+  - [ ] Tie-in with UI for clean UX
+- [ ] Connect file-drawer & local storage for meaningful navigation
+- [ ] Add shortcuts for: 
+  - [ ] new file
+  - [ ] new folder
+  - [ ] delete file/folder
+## Reason for existence
+
+1. WYSIWYG editor for markdown on the web doesn’t exist
+2. 1 Is even worse on mobile devices
+3. As a learning experience building a full-fledged web application
+4. Opportunity to showcase ZenLibs
+
+## Features
+
+1. Automatic save to local storage
+2. Ability to save directly to GitHub
+3. Markdown to HTML5 in native
+
+## TODO
+
+- [x] Convert to PWA
+  - [x] Add SW from traversy code
+  - [x] Add app-manifest, and check that things work as a pwa
+- [ ] Switch between edit and view mode
+- [ ] Use BrowserFS for: 
+  - [x] Local file storage
+  - [x] Sync with dropbox
+  - [ ] Tie-in with UI for clean UX
+- [ ] Connect file-drawer & local storage for meaningful navigation
+- [ ] Add shortcuts for: 
+  - [ ] new file
+  - [ ] new folder
+  - [ ] delete file/folder
+## Reason for existence
+
+1. WYSIWYG editor for markdown on the web doesn’t exist
+2. 1 Is even worse on mobile devices
+3. As a learning experience building a full-fledged web application
+4. Opportunity to showcase ZenLibs
+
+## Features
+
+1. Automatic save to local storage
+2. Ability to save directly to GitHub
+3. Markdown to HTML5 in native
+
+## TODO
+
+- [x] Convert to PWA
+  - [x] Add SW from traversy code
+  - [x] Add app-manifest, and check that things work as a pwa
+- [ ] Switch between edit and view mode
+- [ ] Use BrowserFS for: 
+  - [x] Local file storage
+  - [x] Sync with dropbox
+  - [ ] Tie-in with UI for clean UX
+- [ ] Connect file-drawer & local storage for meaningful navigation
+- [ ] Add shortcuts for: 
+  - [ ] new file
+  - [ ] new folder
+  - [ ] delete file/folder
