@@ -136,7 +136,7 @@ function getUrlParams(url)
 function main()
 {
     const params = getUrlParams(window.location.href);
-    const welcomeMsg="# Welcome To ZenLibs! \n Your contrnt is being loaded";
+    const welcomeMsg="";//# Welcome To ZenLibs! \n Your contrnt is being loaded";
     if(params.firstLoad==1)
     {
         console.log("IFrame thinks this is firstLoad");
