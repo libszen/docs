@@ -28,6 +28,8 @@ function initialContent(inInitContent)
         'taskCounter'
         ]
     });
+
+    //console.log("Editor: " + editor);
 }
 
 function zlGetEditorHeight()
@@ -109,3 +111,52 @@ function sendMsgToParent(inMsgTopic, inMsgString)
     ]);
 }
 
+/**
+ * Get the URL parameters
+ * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+ * @param  {String} url The URL
+ * @return {Object}     The URL parameters
+ */
+function getUrlParams(url)
+{
+	let params = {};
+	var parser = document.createElement('a');
+	parser.href = url;
+	var query = parser.search.substring(1);
+	var vars = query.split('&');
+	for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		params[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    //console.log(JSON.stringify(params));
+	return params;
+
+}
+
+function main()
+{
+    const params = getUrlParams(window.location.href);
+    const welcomeMsg="# Welcome To ZenLibs! \n Your contrnt is being loaded";
+    if(params.firstLoad==1)
+    {
+        console.log("IFrame thinks this is firstLoad");
+        initialContent(welcomeMsg);
+        sendMsgToParent("firstLoadDone", "");
+    }
+
+
+
+}
+
+function updateContent(recvdString)
+{
+    //console.log("Editor from updateContent: " + editor);
+    if(editor!==null)
+    {
+        editor.setValue(recvdString, false);
+
+    }
+}
+
+
+main();

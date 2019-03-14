@@ -9,7 +9,6 @@
 
     <link rel="preload" href="./treeview/tree.min.js" as="script">
     <link rel="preload" href="./js/zlUtils.js" as="script">
-    <link rel="preload" href="js/app.js" as="script">
     
 
     <link rel="preload" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" as="style">
@@ -25,6 +24,19 @@
     <script src="./treeview/tree.min.js"></script>
     <script src="./js/zlUtils.js"></script>
 
+    <style>
+        .tuiFrame {
+            display: block;
+            border: none;
+            height: calc(100vh - 40px);
+            width: 100%;
+            body {
+                margin-left: 0.5%;
+                margin-right: 0.5%;
+                
+            }
+        }
+    </style>
     <!--Style for ZenLibs' toolbar-->
     <style>
         body {margin:0;}
@@ -129,6 +141,7 @@
     </div>
     
     <div id="iFrameParentDiv" >
+            <iframe id="tuiFrame" class="tuiFrame" src="./tui/view.html?firstLoad=1"></iframe>
     </div>
     
 </body>
@@ -220,7 +233,7 @@ function isThisMobile()
 
 function tuiLoaded() 
 {
-    fetch('./TinySeed.md')
+    fetch('TinySeed.md')
     .then(function(response) 
     {
         return response.text();
@@ -228,9 +241,24 @@ function tuiLoaded()
     .then(function(retText) 
     {
         sendMsgToIFrame("initTui", retText);
+        
     });
 }
 
+
+function firstLoadFn(firstLoad=false) 
+{
+    fetch('TinySeed.md')
+    .then(function(response) 
+    {
+        return response.text();
+    })
+    .then(function(retText) 
+    {
+        sendMsgToIFrame("updateContent", retText);
+        
+    });
+}
 
 // Listen to message from child window    
 bindEvent(window, 'message', hanleMsgFromChild);
@@ -271,9 +299,9 @@ function hanleMsgFromChild(msg)
         }
         break;
 
-        case 'gimmeContent':
+        case 'firstLoadDone':
         {
-            tuiLoaded();
+            firstLoadFn();
         }
         break;
         default:
@@ -311,9 +339,12 @@ function insertIFrame(inIframeSrc)
 
     const iFrameParent = document.getElementById(iFrameParentDiv);
 
-    var c = iFrameParent.childNodes;
+    while (iFrameParent.firstChild) 
+    {
+        iFrameParent.removeChild(iFrameParent.firstChild);
+    }
 
-    iFrameParent.replaceChild(iframe, iFrameParent.firstChild);
+    iFrameParent.appendChild(iframe);
 
 }
 
@@ -332,10 +363,11 @@ function toggleEdit()
 }
 
 //insertIFrame(viewSrc);
-
+/*
 window.onload = function() {
     insertIFrame(viewSrc);
 };
+*/
 
 </script>
 </html>
