@@ -136,15 +136,12 @@ function getUrlParams(url)
 function main()
 {
     const params = getUrlParams(window.location.href);
-    const welcomeMsg="";//# Welcome To ZenLibs! \n Your contrnt is being loaded";
-    if(params.firstLoad==1)
+    const welcomeMsg="# Welcome To ZenLibs! \nOpen a file by clicking on the folder icon, or edit & save this!";
+    if(params.firstLoad==6)
     {
-        console.log("IFrame thinks this is firstLoad");
         initialContent(welcomeMsg);
         sendMsgToParent("firstLoadDone", "");
     }
-
-
 
 }
 

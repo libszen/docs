@@ -18,7 +18,7 @@
 - [x] Convert to PWA
   - [x] Add SW from traversy code
   - [x] Add app-manifest, and check that things work as a pwa
-- [ ] Switch between edit and view mode
+- [x] Switch between edit and view mode
 - [ ] Use BrowserFS for: 
   - [x] Local file storage
   - [x] Sync with dropbox

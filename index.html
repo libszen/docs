@@ -14,8 +14,11 @@
     <link rel="preload" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" as="style">
     <link rel="preload" href="./treeview/treejs.min.css" as="style">
     
-    <link rel="preload" href="TinySeed.md" as="fetch">
+    <!--
+        <link rel="preload" href="TinySeed.md" as="fetch">
 
+    -->
+    
     <!--For custom toolbar added by ZenLibs-->
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" media="screen" onload="if(media!='all')media='all'">
    <link rel="stylesheet" href="./treeview/treejs.min.css" media="none" onload="if(media!='all')media='all'">
@@ -141,7 +144,7 @@
     </div>
     
     <div id="iFrameParentDiv" >
-            <iframe id="tuiFrame" class="tuiFrame" src="./tui/view.html?firstLoad=1"></iframe>
+            <iframe id="tuiFrame" class="tuiFrame" src="./tui/view.html?firstLoad=6"></iframe>
     </div>
     
 </body>
@@ -233,7 +236,8 @@ function isThisMobile()
 
 function tuiLoaded() 
 {
-    fetch('TinySeed.md')
+    
+    /*fetch('TinySeed.md')
     .then(function(response) 
     {
         return response.text();
@@ -243,12 +247,16 @@ function tuiLoaded()
         sendMsgToIFrame("initTui", retText);
         
     });
+    */
+    const retText = "#Hello!\n## From the main file!";
+    sendMsgToIFrame("initTui", retText);
+
 }
 
 
 function firstLoadFn(firstLoad=false) 
 {
-    fetch('TinySeed.md')
+    /*fetch('TinySeed.md')
     .then(function(response) 
     {
         return response.text();
@@ -258,6 +266,8 @@ function firstLoadFn(firstLoad=false)
         sendMsgToIFrame("updateContent", retText);
         
     });
+    */
+    
 }
 
 // Listen to message from child window    
